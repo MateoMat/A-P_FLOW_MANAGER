@@ -1,6 +1,7 @@
 <?php 
-include_once '../Model/MySQLConnect.php';
-include_once '../Model/CycleEntity.php';
+include_once './Model/Database.php';
+include_once './Model/CycleEntity.php';
+$conn = Database::createConnection();
 ?>
 
 
@@ -9,18 +10,21 @@ include_once '../Model/CycleEntity.php';
         <div class="row">
             <div class="col-lg-12">
 
-               
+               <div class="col-sm-6">
+                   <p>Wybierz cykl promocyjny : </p>
                 <?php
                 
-//                $conn=Database::CreateConnection();
-//                $cycle=CycleEntity::LoadCycleById($conn,1);
-//                echo $cycle;
-//                echo 'cos tam';
                 
-                
+//                $cycle=CycleEntity::LoadCycleById($conn,2);
+//                echo $cycle->getCycle_id();
+                  $cycles= CycleEntity::Load_All_Cycles($conn);
+                  foreach ($cycles as $a) {
+                      echo '<button class="btn btn-primary">'.$a->getCycle_name().'</button>';
+                  }
                 
                 ?>
-                <p>cos</p>
+            </div>
+
                 
             </div>
         </div>
