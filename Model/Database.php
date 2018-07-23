@@ -1,5 +1,6 @@
 <?php
-//Class responsible for MySql Connection
+
+
 class Database{
     static protected $dbUser='root';
     static protected $dbPass='root';
@@ -10,5 +11,7 @@ class Database{
         return $conn= new mysqli(self::$dbHost, self::$dbUser, self::$dbPass, self::$dbName);
     }
 }
+
+
 
 
