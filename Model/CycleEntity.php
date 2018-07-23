@@ -16,6 +16,7 @@ class CycleEntity {
         return $this->cycle_id;
     }
     
+    
     public function setCycle_id($param) {
         $this->cycle_id=$param;
     }
@@ -32,22 +33,41 @@ class CycleEntity {
 
     public function LoadCycleById(mysqli $conn,$id)
     {
-       $sql="SELECT * FROM `Cycle` WHERE `id`='" . $id ."'";
+       $sql="SELECT * FROM `Cycle` WHERE `Cycle_Id`='" . $id ."'";
        $result=$conn->query($sql);
-       if($result==true AND $result->num_rows>=1)
+       if($result==true)
        {
            foreach($result as $res)
            {
                $loadCycleById=new CycleEntity;
-               $loadCycleById->cycle_id=$res['cycle_id'];
-               $loadCycleById->cycle_name=$res['cycle_name'];
+               $loadCycleById->cycle_id=$res['Cycle_Id'];
+               $loadCycleById->cycle_name=$res['Cycle_name'];
                
                $ret=$loadCycleById;
-           }
-           
+               return $ret;
+           }      
        }
-       return $ret;
-       
+             
+    }
+    
+    public function Load_All_Cycles($conn)
+    {
+    $sql="SELECT * FROM `Cycle`";
+    $result=$conn->query($sql);
+    if($result==true)
+    {
+        foreach($result as $res)
+        {
+            $Load_All_Cycles=new CycleEntity();
+            $Load_All_Cycles->cycle_id=$res['Cycle_id'];
+            $Load_All_Cycles->cycle_name=$res['Cycle_name'];
+            
+            $return[]=$Load_All_Cycles;
+        }
+        return $return;
+    }
+    
+        
     }
     
 }
